@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+// 定义一个消息，该消息包含所有基本的数据类型。
+message AllTypes {
+  // 布尔类型
+  bool bool_field = 1;  // 布尔值
+
+  // 字符串类型
+  string string_field = 2;  // UTF-8 编码的字符串
+
+  // 字节流类型
+  bytes bytes_field = 3;  // 原始字节流
+
+  // 整数类型
+  int32 int32_field = 4;  // 32位有符号整数
+  int64 int64_field = 5;  // 64位有符号整数
+  uint32 uint32_field = 6;  // 32位无符号整数
+  uint64 uint64_field = 7;  // 64位无符号整数
+  sint32 sint32_field = 8;  // 32位有符号整数，使用 zigzag 编码
+  sint64 sint64_field = 9;  // 64位有符号整数，使用 zigzag 编码
+
+  // 浮点数类型
+  float float_field = 14;  // 单精度浮点数
+  double double_field = 15;  // 双精度浮点数
+
+  // 固定宽度整数类型
+  fixed32 fixed32_field = 10;  // 32位无符号整数，小端存储
+  fixed64 fixed64_field = 11;  // 64位无符号整数，小端存储
+  sfixed32 sfixed32_field = 12;  // 32位有符号整数，小端存储
+  sfixed64 sfixed64_field = 13;  // 64位有符号整数，小端存储
+
+  // 重复字段类型
+  repeated int32 repeated_int32_field = 31;  // 可以包含多个元素的 int32 字段
+
+  // 映射字段类型
+  map<int32, string> map_int32_string_field = 32;  // 键为 int32，值为 string 的映射
+
+  // 枚举类型
+  EnumType enum_field = 33;  // 枚举类型字段
+
+  // 嵌套消息类型
+  MessageType nested_message_field = 34;  // 另一个消息类型的字段
+
+  // 嵌套的消息类型定义
+  message MessageType {
+    string nested_string_field = 1;  // 嵌套消息中的字符串字段
+  }
+
+  // 枚举类型定义
+  enum EnumType {
+    ENUM_VALUE_0 = 0;  // 枚举值 0
+    ENUM_VALUE_1 = 1;  // 枚举值 1
+    ENUM_VALUE_2 = 2;  // 枚举值 2
+  }
+}
+
+// 以下是用于包装基本类型的特殊消息类型，它们允许携带额外的元数据，如 null 值。
+message BoolValue {bool value = 1;}  // 包装布尔值
+message StringValue {string value = 1;}  // 包装字符串值
+message BytesValue {bytes value = 1;}  // 包装字节流值
+message Int32Value {int32 value = 1;}  // 包装 32 位整数值
+message Int64Value {int64 value = 1;}  // 包装 64 位整数值
+message UInt32Value {uint32 value = 1;}  // 包装无符号 32 位整数值
+message UInt64Value {uint64 value = 1;}  // 包装无符号 64 位整数值
+message SInt32Value {sint32 value = 1;}  // 包装 zigzag 编码的 32 位整数值
+message SInt64Value {sint64 value = 1;}  // 包装 zigzag 编码的 64 位整数值
+message Fixed32Value {fixed32 value = 1;}  // 包装小端存储的 32 位整数值
+message Fixed64Value {fixed64 value = 1;}  // 包装小端存储的 64 位整数值
+message SFixed32Value {sfixed32 value = 1;}  // 包装小端存储的 32 位有符号整数值
+message SFixed64Value {sfixed64 value = 1;}  // 包装小端存储的 64 位有符号整数值
+message FloatValue {float value = 1;}  // 包装单精度浮点数值
+message DoubleValue {double value = 1;}  // 包装双精度浮点数值
